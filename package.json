@@ -1,28 +1,24 @@
 {
-  "name": "paytm-clone",
+  "name": "week-18",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "check-types": "turbo run check-types"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "prettier": "^3.7.4",
-    "turbo": "^2.7.3",
-    "typescript": "5.9.2"
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "prettier": "^3.2.5",
+    "turbo": "latest"
   },
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "npm@10.9.2",
+  "packageManager": "npm@10.2.4",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "@prisma/client": "^5.22.0",
-    "prisma": "^5.22.0"
-  }
+  ]
 }
