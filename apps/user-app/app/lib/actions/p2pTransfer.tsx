@@ -118,6 +118,16 @@ export async function p2pTransfer(to: string, amount: number) {
                         data: { amount: { increment: amount } }
                     });
                 }
+
+                // Create p2p transfer record
+                await tx.p2pTransfer.create({
+                    data: {
+                        amount: amount,
+                        timestamp: new Date(),
+                        fromUserId: fromId,
+                        toUserId: toUser.id
+                    }
+                });
             });
 
             return {

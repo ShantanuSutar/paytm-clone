@@ -10,6 +10,7 @@ export default function Sidebar() {
     { name: "Home", href: "/" },
     { name: "Transfer", href: "/dashboard/transfer" },
     { name: "Send Money", href: "/dashboard/send" },
+    { name: "P2P Transfers", href: "/dashboard/p2p" },
     { name: "Transactions", href: "/dashboard/transactions" },
   ];
 
