@@ -25,6 +25,11 @@ export default function Layout({
             <SidebarItem href={"/dashboard"} icon={<HomeIcon />} title="Dashboard" />
             <SidebarItem href={"/transfer"} icon={<AddMoneyIcon />} title="Add Money" />
             <SidebarItem href={"/transactions"} icon={<TransactionsIcon />} title="Transactions" />
+            
+            <div className="px-4 py-4 mt-6 mb-2">
+              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Developer</h2>
+            </div>
+            <SidebarItem href={"/webhook-simulator"} icon={<WebhookIcon />} title="Webhook Simulator" />
           </nav>
 
           <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-slate-200 bg-slate-50">
@@ -59,5 +64,11 @@ function AddMoneyIcon() {
 function TransactionsIcon() {
     return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+    </svg>
+}
+
+function WebhookIcon() {
+    return <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-1.666.75H5.25A2.25 2.25 0 0 1 3 7.104V3.75a2.25 2.25 0 0 1 2.25-2.25h.75c.967 0 1.8.43 2.25 1.104zm7.5 0v5.714a2.25 2.25 0 0 1-1.666.75H12.75A2.25 2.25 0 0 1 10.5 7.104V3.75a2.25 2.25 0 0 1 2.25-2.25h.75c.967 0 1.8.43 2.25 1.104zM9.75 12.75h.008v.008H9.75v-.008zm0 2.25h.008v.008H9.75v-.008zm7.5-2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008v-.008zm-1.5-7.5c.966 0 1.75-.784 1.75-1.75s-.784-1.75-1.75-1.75-1.75.784-1.75 1.75.784 1.75 1.75 1.75zM12 9a.75.75 0 1 0 0-1.5A.75.75 0 0 0 12 9z" />
     </svg>
 }

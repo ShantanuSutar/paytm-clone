@@ -5,9 +5,12 @@ import { authOptions } from "../../lib/auth";
 
 async function getOnRampTransactions() {
     const session = await getServerSession(authOptions);
+    if (!session?.user?.id) {
+        return [];
+    }
     const txns = await prisma.onRampTransaction.findMany({
         where: {
-            userId: Number(session?.user?.id)
+            userId: parseInt(session.user.id)
         },
         orderBy: {
             startTime: "desc"
