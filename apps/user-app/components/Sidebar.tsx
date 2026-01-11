@@ -9,6 +9,7 @@ export default function Sidebar() {
   const menuItems = [
     { name: "Home", href: "/" },
     { name: "Transfer", href: "/dashboard/transfer" },
+    { name: "Send Money", href: "/dashboard/send" },
     { name: "Transactions", href: "/dashboard/transactions" },
   ];
 

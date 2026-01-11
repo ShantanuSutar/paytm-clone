@@ -40,10 +40,10 @@ export const AddMoney = () => {
     return <Card title="Add Money to Wallet" href="">
         <div className="w-full space-y-6">
             <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-3">Amount</label>
+                <div className="block text-sm font-semibold text-slate-700 mb-3">Amount</div>
                 <div className="relative">
-                    {/* <span className="absolute left-4 top-3 text-slate-500 font-semibold"></span> */}
                     <TextInput 
+                        label="Amount"
                         placeholder="Enter amount in ₹" 
                         onChange={(val) => setValue(Number(val))} 
                     />
@@ -67,13 +67,13 @@ export const AddMoney = () => {
             </div>
             
             <div className="pt-4 border-t border-slate-200">
-                <Button 
+                <button 
                     onClick={handleAddMoney}
                     disabled={isLoading || value <= 0}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-2.5 px-4 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                     {isLoading ? "Processing..." : `Add ₹${value} to Wallet`}
-                </Button>
+                </button>
                 <p className="text-xs text-slate-500 text-center mt-3">You will be redirected to your bank's website</p>
             </div>
         </div>

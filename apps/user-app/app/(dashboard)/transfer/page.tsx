@@ -55,7 +55,7 @@ export default async function Transfer() {
                             </li>
                             <li className="flex gap-3">
                                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold">3</span>
-                                <span>Click \"Add Money\" button</span>
+                                <span>Click "Add Money" button</span>
                             </li>
                             <li className="flex gap-3">
                                 <span className="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-semibold">4</span>
