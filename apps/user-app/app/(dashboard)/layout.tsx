@@ -2,6 +2,8 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Appbar } from "../../../../packages/ui/src/Appbar";
 import { SidebarItem } from "../../components/SidebarItem";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Layout({
   children,
@@ -9,6 +11,28 @@ export default function Layout({
   children: React.ReactNode;
 }): JSX.Element {
   const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [session.status, router]);
+
+  if (session.status === "loading") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-slate-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-slate-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (session.status === "unauthenticated") {
+    return null;
+  }
 
   return (
     <div className="flex flex-col h-screen bg-slate-50">
