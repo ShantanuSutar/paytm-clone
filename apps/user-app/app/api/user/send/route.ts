@@ -89,27 +89,44 @@ export async function POST(req: NextRequest) {
             });
         }
 
-        // Perform atomic transaction
-        await db.$transaction([
+        // Perform atomic transaction with row locking
+        await db.$transaction(async (tx) => {
+            // Lock sender's balance FOR UPDATE to prevent race conditions
+            const senderBalanceLocked = await tx.$queryRaw`
+                SELECT * FROM "Balance" WHERE "userId" = ${senderUserId} FOR UPDATE
+            `;
+
+            if (!senderBalanceLocked || (Array.isArray(senderBalanceLocked) && senderBalanceLocked.length === 0)) {
+                throw new Error('Sender balance not found');
+            }
+
+            const lockedBalance = Array.isArray(senderBalanceLocked) ? senderBalanceLocked[0] : senderBalanceLocked;
+
+            // Re-check balance after locking (double-check pattern)
+            if (lockedBalance.amount < amountNum) {
+                throw new Error('Insufficient balance');
+            }
+
             // Deduct from sender
-            db.balance.update({
+            await tx.balance.update({
                 where: { userId: senderUserId },
                 data: {
                     amount: {
                         decrement: amountNum
                     }
                 }
-            }),
+            });
+
             // Add to recipient
-            db.balance.update({
+            await tx.balance.update({
                 where: { userId: recipient.id },
                 data: {
                     amount: {
                         increment: amountNum
                     }
                 }
-            })
-        ]);
+            });
+        });
 
         return NextResponse.json(
             { message: `Successfully sent ₹${(amountNum / 100).toFixed(2)} to ${phoneNumber}` },

@@ -74,19 +74,21 @@ export async function p2pTransfer(to: string, amount: number) {
             }
         }
 
-        // Atomic transaction with proper error handling
+        // Atomic transaction with row locking
         try {
             await prisma.$transaction(async (tx) => {
-                // Check sender balance
-                const fromBalance = await tx.balance.findUnique({
-                    where: { userId: fromId }
-                });
+                // Lock the sender's balance row FOR UPDATE to prevent concurrent transfers
+                const fromBalance = await tx.$queryRaw`
+                    SELECT * FROM "Balance" WHERE "userId" = ${fromId} FOR UPDATE
+                `;
 
-                if (!fromBalance) {
+                if (!fromBalance || (Array.isArray(fromBalance) && fromBalance.length === 0)) {
                     throw new Error('Sender balance not found');
                 }
 
-                if (fromBalance.amount < amount) {
+                const balance = Array.isArray(fromBalance) ? fromBalance[0] : fromBalance;
+
+                if (balance.amount < amount) {
                     throw new Error('Insufficient balance');
                 }
 
