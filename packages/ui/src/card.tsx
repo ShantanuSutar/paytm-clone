@@ -9,6 +9,18 @@ export function Card({
   children: React.ReactNode;
   href: string;
 }): JSX.Element {
+  // If href is empty, render as a div to allow interactive elements inside
+  if (!href) {
+    return (
+      <div className={className}>
+        <h2 className="text-sm">
+          {title}
+        </h2>
+        <p>{children}</p>
+      </div>
+    );
+  }
+
   return (
     <a
       className={className}
