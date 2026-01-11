@@ -15,6 +15,16 @@ export async function POST(req: NextRequest) {
             );
         }
 
+        // Validate token format (should be a non-empty string)
+        if (typeof body.token !== 'string' || body.token.trim().length === 0) {
+            return NextResponse.json(
+                {
+                    message: "Invalid token: must be a non-empty string"
+                },
+                { status: 400 }
+            );
+        }
+
         const paymentInformation: {
             token: string;
             userId: string;
@@ -81,6 +91,36 @@ export async function POST(req: NextRequest) {
                     message: "Transaction already processed"
                 },
                 { status: 409 }
+            );
+        }
+
+        // Validate userId matches the transaction's userId (prevent fraud)
+        if (existingTransaction.userId !== userId) {
+            return NextResponse.json(
+                {
+                    message: "User ID mismatch: webhook user does not match transaction user"
+                },
+                { status: 403 }
+            );
+        }
+
+        // Validate amount matches the transaction amount (prevent amount fraud)
+        if (existingTransaction.amount !== amount) {
+            return NextResponse.json(
+                {
+                    message: "Amount mismatch: webhook amount does not match transaction amount"
+                },
+                { status: 400 }
+            );
+        }
+
+        // Validate transaction status is Processing (can only complete processing transactions)
+        if (existingTransaction.status !== "Processing") {
+            return NextResponse.json(
+                {
+                    message: "Invalid transaction status: can only process 'Processing' transactions"
+                },
+                { status: 400 }
             );
         }
 
