@@ -41,7 +41,8 @@ async function getOnRampTransactions() {
         time: t.startTime,
         amount: t.amount,
         status: t.status,
-        provider: t.provider
+        provider: t.provider,
+        token: t.token
     }));
 }
 

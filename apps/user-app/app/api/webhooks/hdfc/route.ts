@@ -126,14 +126,19 @@ export async function POST(req: NextRequest) {
 
         // Atomic transaction: update balance and transaction status
         await db.$transaction([
-            db.balance.updateMany({
+            db.balance.upsert({
                 where: {
                     userId: userId
                 },
-                data: {
+                update: {
                     amount: {
                         increment: amount
                     }
+                },
+                create: {
+                    userId: userId,
+                    amount: amount,
+                    locked: 0
                 }
             }),
             db.onRampTransaction.updateMany({

@@ -27,27 +27,8 @@ export async function createOnRampTransaction(provider: string, amount: number) 
         }
     });
 
-    // Simulate webhook callback after 2 seconds
-    setTimeout(async () => {
-        try {
-            const webhookUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-            await fetch(`${webhookUrl}/api/webhooks/hdfc`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    token: token,
-                    user_identifier: userId.toString(),
-                    amount: amountInPaise.toString(),
-                }),
-            });
-        } catch (error) {
-            console.error("Failed to trigger webhook:", error);
-        }
-    }, 2000);
-
     return {
-        message: "Done"
+        message: "Done",
+        token: token
     }
 }

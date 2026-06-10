@@ -20,7 +20,8 @@ export const OnRampTransactions = ({
         time: Date,
         amount: number,
         status: string,
-        provider: string
+        provider: string,
+        token: string
     }[]
 }) => {
     if (!transactions.length) {
@@ -45,6 +46,11 @@ export const OnRampTransactions = ({
                                 <div className="text-xs text-slate-500 mt-1">
                                     {t.time instanceof Date ? t.time.toLocaleDateString('en-IN') : new Date(t.time).toLocaleDateString('en-IN')}
                                 </div>
+                                {t.status === "Processing" && t.token && (
+                                    <div className="text-xs text-blue-600 mt-1 font-mono">
+                                        Token: {t.token.substring(0, 12)}...
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
