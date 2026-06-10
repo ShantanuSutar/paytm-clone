@@ -31,7 +31,7 @@ export default function Layout({
   }
 
   if (session.status === "unauthenticated") {
-    return null;
+    return <div />;
   }
 
   return (

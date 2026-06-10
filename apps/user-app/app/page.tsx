@@ -1,6 +1,5 @@
 "use client"
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Appbar } from "@repo/ui/appbar";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -24,5 +23,5 @@ export default function Page(): JSX.Element {
     return <div>Redirecting to login...</div>;
   }
   
-  return null;
+  return <div />;
 }

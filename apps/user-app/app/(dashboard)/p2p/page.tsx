@@ -65,7 +65,7 @@ async function getP2PTransactions() {
         amount: t.amount,
         timestamp: t.timestamp,
         isReceived: t.toUserId === userId,
-        otherUserName: t.fromUserId === userId ? t.toUser.name : t.fromUser.name,
+        otherUserName: (t.fromUserId === userId ? t.toUser.name : t.fromUser.name) || undefined,
         otherUserNumber: t.fromUserId === userId ? t.toUser.number : t.fromUser.number
     }));
 }
