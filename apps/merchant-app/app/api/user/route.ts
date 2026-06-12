@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import prisma from "@repo/db/client";
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async () => {
     // This is a test endpoint - creates a merchant
     await prisma.merchant.create({

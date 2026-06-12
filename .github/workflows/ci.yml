@@ -68,3 +68,14 @@ jobs:
       run: |
         cd apps/user-app
         npm run build
+
+    - name: Build merchant-app
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/paytm_test
+        NEXTAUTH_SECRET: "ci-test-secret"
+        NEXTAUTH_URL: "http://localhost:3000"
+        GOOGLE_CLIENT_ID: "test-client-id"
+        GOOGLE_CLIENT_SECRET: "test-client-secret"
+      run: |
+        cd apps/merchant-app
+        npm run build
