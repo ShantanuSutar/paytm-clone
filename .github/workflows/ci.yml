@@ -48,7 +48,19 @@ jobs:
         cd packages/db
         npx prisma generate
 
-    - name: Build user-app only
+    - name: Run linting (user-app)
+      run: |
+        cd apps/user-app
+        npm run lint
+
+    - name: TypeScript check (user-app)
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/paytm_test
+      run: |
+        cd apps/user-app
+        npx tsc --noEmit
+
+    - name: Build user-app
       env:
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/paytm_test
         NEXTAUTH_SECRET: "ci-test-secret"
