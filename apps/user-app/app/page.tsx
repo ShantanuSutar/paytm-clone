@@ -3,6 +3,9 @@ import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
+// Intentional syntax error to test CI failure
+const broken = {;
+
 export default function Page(): JSX.Element {
   const session = useSession();
   const router = useRouter();
