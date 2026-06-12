@@ -1,10 +1,6 @@
 "use client"
 import { Card } from "../../../packages/ui/src/card"
 
-function getTransactionType(isReceived: boolean) {
-    return isReceived ? "received" : "sent";
-}
-
 function getTransactionIcon(isReceived: boolean) {
     return isReceived ? "↓" : "↑";
 }

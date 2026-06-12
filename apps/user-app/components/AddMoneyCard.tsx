@@ -1,11 +1,9 @@
 "use client"
-import { Button } from "../../../packages/ui/src/button";
 import { Card } from "../../../packages/ui/src/card";
 import { Select } from "../../../packages/ui/src/Select";
 import { useState } from "react";
 import { TextInput } from "../../../packages/ui/src/TextInput";
 import { createOnRampTransaction } from "../app/lib/actions/createOnrampTransaction";
-import { useRouter } from "next/navigation";
 
 const SUPPORTED_BANKS = [{
     name: "HDFC Bank",
@@ -16,7 +14,6 @@ const SUPPORTED_BANKS = [{
 }];
 
 export const AddMoney = () => {
-    const router = useRouter();
     const [redirectUrl, setRedirectUrl] = useState(SUPPORTED_BANKS[0]?.redirectUrl);
     const [provider, setProvider] = useState(SUPPORTED_BANKS[0]?.name || "");
     const [value, setValue] = useState(0);
