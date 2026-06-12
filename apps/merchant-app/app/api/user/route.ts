@@ -2,13 +2,15 @@ import { NextResponse } from "next/server"
 import prisma from "@repo/db/client";
 
 export const GET = async () => {
-    await prisma.user.create({
+    // This is a test endpoint - creates a merchant
+    await prisma.merchant.create({
         data: {
-            email: "asd",
-            name: "adsads"
+            email: "test@example.com",
+            name: "Test Merchant",
+            auth_type: "Google"
         }
     })
     return NextResponse.json({
-        message: "hi there"
+        message: "Merchant created"
     })
 }
