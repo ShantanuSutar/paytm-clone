@@ -35,7 +35,8 @@ jobs:
     - name: Deploy user-app
       run: |
         cd apps/user-app
-        npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
+        # npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
+        echo "Deployment disabled - configure Vercel token first"
 
   deploy-merchant-app:
     runs-on: ubuntu-latest
@@ -67,7 +68,8 @@ jobs:
     - name: Deploy merchant-app
       run: |
         cd apps/merchant-app
-        npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
+        # npx vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
+        echo "Deployment disabled - configure Vercel token first"
 
   deploy-bank-webhook:
     runs-on: ubuntu-latest
@@ -94,9 +96,10 @@ jobs:
     - name: Deploy bank-webhook-handler
       run: |
         cd apps/bank_webhook_handler
-        zip -r deploy.zip . -x "*.git*" "node_modules/*"
-        curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.RENDER_DEPLOY_HOOK_URL }}" \
-          -H "Content-Type: application/zip" \
-          -F "archive=@deploy.zip" \
-          ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        # zip -r deploy.zip . -x "*.git*" "node_modules/*"
+        # curl -X POST \
+        #   -H "Authorization: Bearer ${{ secrets.RENDER_DEPLOY_HOOK_URL }}" \
+        #   -H "Content-Type: application/zip" \
+        #   -F "archive=@deploy.zip" \
+        #   ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        echo "Deployment disabled - configure Render deploy hook first"
