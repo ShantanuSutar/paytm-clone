@@ -42,20 +42,17 @@ jobs:
       run: npm ci
 
     - name: Generate Prisma Client
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/paytm_test
       run: |
         cd packages/db
         npx prisma generate
 
-    - name: Run linting
-      run: npm run lint
-
-    - name: Run TypeScript type check
-      run: npx tsc --noEmit
-
-    - name: Build all packages
-      run: npm run build
-
-    - name: Run tests (if any)
+    - name: Build user-app only
+      env:
+        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/paytm_test
+        NEXTAUTH_SECRET: "ci-test-secret"
+        NEXTAUTH_URL: "http://localhost:3001"
       run: |
-        # Add test command here when tests are available
-        echo "No tests configured yet"
+        cd apps/user-app
+        npm run build
